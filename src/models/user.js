@@ -3,12 +3,10 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const { secret } = require("../config.js");
-
 if (process.env.SECRET) {
   var secretProduction = process.env.SECRET;
 } else {
-  const { secret } = require("../config");
+  const { secret } = require("../config.js");
   var secretProduction = secret;
 }
 

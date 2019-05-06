@@ -6,7 +6,7 @@ const User = require('../models/user')
 if (process.env.SECRET) {
   var secretProduction = process.env.SECRET;
 } else {
-  const { secret } = require(".config");
+  const { secret } = require(".config.js");
   var secretProduction = secret;
 }
 
