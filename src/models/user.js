@@ -5,6 +5,12 @@ const jwt = require('jsonwebtoken')
 
 const { secret } = require("../config.js");
 
+if (process.env.SECRET) {
+  var secretProduction = process.env.SECRET;
+} else {
+  const { secret } = require("../config.js");
+  var secretProduction = secret;
+}
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -90,7 +96,7 @@ userSchema.statics.findByCredentials = function(email, password) {
 
 userSchema.methods.generateToken = function() {
   const user = this
-  const token = jwt.sign({ _id: user._id.toString() }, 'replaceThisSecret', { expiresIn: '7 days'})
+  const token = jwt.sign({ _id: user._id.toString() }, secretProduction, { expiresIn: '7 days'})
   user.tokens = user.tokens.concat({ token })
   return new Promise(function( resolve, reject) {
     user.save().then(function(user){
