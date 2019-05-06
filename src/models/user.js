@@ -8,7 +8,7 @@ const { secret } = require("../config.js");
 if (process.env.SECRET) {
   var secretProduction = process.env.SECRET;
 } else {
-  const { secret } = require("../config.js");
+  const { secret } = require("../config");
   var secretProduction = secret;
 }
 
